@@ -3,8 +3,8 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-6">
-            <div class="text-right mb-3">
+        <div class="col-md-8">
+            <div class="mb-3 text-right">
                 <a href="{{ route( 'posts.create') }}" class="btn btn-primary">Nuovo post</a>
             </div>
             @foreach ($posts as $post)
@@ -77,7 +77,7 @@
                     <div class="card-body">
                         <h5 class="card-title">{{ $post->title }}</h5>
                         <p class="card-text">
-                            {{ substr( $post->content, 0, 70 ) . ( strlen( $post->content ) > 70 ? '...' : '' ) }}
+                            {{ substr( $post->content, 0, 100 ) . ( strlen( $post->content ) > 100 ? '...' : '' ) }}
                         </p>
                         <div class="text-right">
                             <a href="{{ route( 'posts.show', $post->id) }}" class="btn btn-primary">Leggi post</a>

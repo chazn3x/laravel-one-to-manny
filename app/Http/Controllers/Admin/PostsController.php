@@ -75,7 +75,7 @@ class PostsController extends Controller
 
         $newPost->slug = $slug;
 
-        $newPost->category_id = $data['category_id'];
+        isset($data['category_id']) ? $newPost->category_id = $data['category_id'] : '';
 
         $newPost->save();
 
@@ -151,7 +151,7 @@ class PostsController extends Controller
 
             }
 
-            $post->category_id = $data['category_id'];
+            isset($data['category_id']) ? $post->category_id = $data['category_id'] : '';
             
         }
         
