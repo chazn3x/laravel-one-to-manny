@@ -31,7 +31,22 @@
                     @foreach ($categories as $category)
                         <tr>
                         <th scope="row">{{ $category->id }}</th>
-                        <td>{{ $category->name }}</td>
+                        @if ( $category->id == $toEdit->id )
+                            <td>
+                                <form action="{{ route( 'categories.update', $category->id ) }}" method="POST">
+                                    @csrf
+                                    @method('PUT')
+                                    <div class="input-group">
+                                        <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" value="{{ old('name') ?? $category->name }}">
+                                        <div class="input-group-append">
+                                            <button type="submit" class="btn btn-outline-primary">Modifica</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </td>
+                        @else
+                            <td>{{ $category->name }}</td>
+                        @endif
                         <td>{{ $category->slug }}</td>
                         <td>
                             {{-- Edit --}}
