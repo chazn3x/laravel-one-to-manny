@@ -55,6 +55,9 @@
                 
                 <div class="card-body">
                     <h4 class="card-title">{{ $post->title }}</h4>
+                    <p class="text-muted">
+                        Categoria: {{ $post->category->name ?? 'Nessuna' }}
+                    </p>
                     <p class="card-text">
                         {{ $post->content }}
                     </p>

@@ -14,7 +14,8 @@ class PostsController extends Controller
     // Validation rules
     protected $validations = [
         'title' => 'required|string|max:100',
-        'content' => 'required|string'
+        'content' => 'required|string',
+        'category_id' => 'nullable|exists:categories,id'
     ];
 
     /**
@@ -74,6 +75,8 @@ class PostsController extends Controller
 
         $newPost->slug = $slug;
 
+        $newPost->category_id = $data['category_id'];
+
         $newPost->save();
 
         // Redirect al post
@@ -101,7 +104,9 @@ class PostsController extends Controller
      */
     public function edit(Post $post)
     {
-        return view('admin.posts.edit', compact('post'));
+        $categories = Category::all();
+
+        return view('admin.posts.edit', compact('post', 'categories'));
     }
 
     /**
@@ -145,6 +150,8 @@ class PostsController extends Controller
                 }
 
             }
+
+            $post->category_id = $data['category_id'];
             
         }
         
