@@ -30,6 +30,29 @@
                                 <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
                         </div>
+
+                        {{-- Categorie --}}
+                        @php
+                            $sortedCategories = $categories->all();
+
+                            usort($sortedCategories, 'sortByName');
+
+                            function sortByName($a, $b) {
+                                return $a->name > $b->name;
+                            }
+                        @endphp
+                        <div class="form-group">
+                            <label for="category">Categoria:</label>
+                            <select class="custom-select @error('category_id') is-invalid @enderror" name="category_id" id="category">
+                                <option value="" disabled {{ old('category_id') ? '' : 'selected' }}>Seleziona una categoria</option>
+                                @foreach ($sortedCategories as $category)
+                                    <option value="{{ $category->id }}" {{ old('category_id') == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
+                                @endforeach
+                            </select>
+                            @error('category_id')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
                         
                         <input id="published" type="hidden" name="published" value="">
                         

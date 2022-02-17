@@ -4,10 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Post;
+use App\Category;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
-
-use function GuzzleHttp\Promise\all;
 
 class PostsController extends Controller
 {
@@ -37,7 +36,9 @@ class PostsController extends Controller
      */
     public function create()
     {
-        return view( 'admin.posts.create' );
+        $categories = Category::all();
+
+        return view( 'admin.posts.create', compact('categories') );
     }
 
     /**
